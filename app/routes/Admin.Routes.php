@@ -6,6 +6,7 @@
     // GET
     $r->addRoute('GET', '/admin', [AdminController::class, 'index']);
     $r->addRoute('GET', '/admin/dashboard', [AdminController::class, 'dashboard']);
+    $r->addRoute('GET', '/admin/logout', [AdminController::class, 'logoutAdmin']);
     
 
 

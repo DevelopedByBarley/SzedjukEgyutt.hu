@@ -38,7 +38,7 @@ class AdminModel
         }
 
         $isVerified = password_verify($pw, $s_admin["password"]);
-        
+
         if (!$isVerified) {
             echo "Felhasználó vagy jelszó nem létezik!";
             exit;
@@ -47,5 +47,18 @@ class AdminModel
         $_SESSION["s_adminId"] = $s_admin["s_adminId"];
 
         return true;
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+
+        $cookieParams = session_get_cookie_params();
+        setcookie("s_adminId", "", 0, $cookieParams["path"], $cookieParams["domain"], $cookieParams["secure"], isset($cookieParams["httponly"]));
+
+
+
+        header('Location: /');
     }
 }

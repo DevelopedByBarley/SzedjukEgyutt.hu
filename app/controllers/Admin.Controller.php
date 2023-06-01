@@ -46,4 +46,8 @@ class AdminController
             header("Location: /admin/dashboard");
         }
     }
+
+    public function logoutAdmin() {
+        $this->adminModel->logout();
+    }
 }
