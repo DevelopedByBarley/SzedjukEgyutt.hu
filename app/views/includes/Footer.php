@@ -1,7 +1,7 @@
 <div class="container-fluid fixed-bottom">
-    <div class="row footer bg-dark">
+    <div class="row footer bg-success" style="min-height: 60px">
         <div class="col text-center">
-            <h1>Footer</h1>
+
         </div>
     </div>
 </div>

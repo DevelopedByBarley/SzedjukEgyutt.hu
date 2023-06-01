@@ -1,12 +1,12 @@
 <?php
 class Database
 {
-    public function getConnect()
+    public  function getConnect()
     {
-        $servername = "localhost";
-        $username = "Barley";
-        $password = "Csak1enter";
-        $dbName = "test";
+        $servername = $_SERVER["DB_HOST"];
+        $username = $_SERVER["DB_USER"];
+        $password = $_SERVER["DB_PASSWORD"];
+        $dbName = $_SERVER["DB_NAME"];
         
         try {
           $conn = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);

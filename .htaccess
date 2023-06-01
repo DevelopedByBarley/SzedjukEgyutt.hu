@@ -3,7 +3,7 @@
 
 
   SetEnv DB_HOST localhost
-  SetEnv DB_NAME test
+  SetEnv DB_NAME szedjuk_egyutt
   SetEnv DB_USER Barley
   SetEnv DB_PASSWORD Csak1enter
   

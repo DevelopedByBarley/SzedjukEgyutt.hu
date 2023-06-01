@@ -1,9 +1,11 @@
 <?php
-require './app/controllers/Home_Controller.php';
+ require_once 'app/controllers/Home.Controller.php';
+
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', [HomeHandler::class, 'getUsers']);
-    $r->addRoute('POST', '/', [HomeHandler::class, 'addUser']);
+    $r->addRoute('GET', '/', [HomeController::class, 'index']);
+
+    require 'app/routes/Admin.Routes.php';
 });
 
 // Fetch method and URI from somewhere
