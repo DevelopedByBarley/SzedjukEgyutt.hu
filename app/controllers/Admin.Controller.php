@@ -22,7 +22,7 @@ class AdminController
             exit;
         }
         echo Renderer::render("Layout.php", [
-            "content" => Renderer::render("super_admin/Form.php")
+            "content" => Renderer::render("pages/super_admin/subscription/Form.php")
         ]);
     }
 
@@ -30,7 +30,26 @@ class AdminController
     {
         LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
         echo Renderer::render("Layout.php", [
-            "content" => Renderer::render("super_admin/Dashboard.php")
+            "content" => Renderer::render("pages/super_admin/dashboard/Dashboard.php")
+        ]);
+    }
+
+
+  
+
+    public function gallery()
+    {
+        LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
+        echo Renderer::render("Layout.php", [
+            "content" => Renderer::render("pages/super_admin/gallery/Gallery.php")
+        ]);
+    }
+
+    public function admins()
+    {
+        LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
+        echo Renderer::render("Layout.php", [
+            "content" => Renderer::render("pages/super_admin/admins/Admins.php")
         ]);
     }
 
@@ -47,7 +66,8 @@ class AdminController
         }
     }
 
-    public function logoutAdmin() {
+    public function logoutAdmin()
+    {
         $this->adminModel->logout();
     }
 }

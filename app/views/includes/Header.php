@@ -1,5 +1,5 @@
 <div class="container-fluid bg-success">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success" style="min-height: 60px">
+    <nav class="navbar navbar-expand-lg navbar-light bg-success fixed-top p-3" style="min-height: 60px">
         <strong>
             <a class="navbar-brand text-light" href="/">SzedjükEgyütt <i class="bi bi-balloon-heart"></i> </a>
         </strong>
@@ -29,12 +29,28 @@
     </nav>
 </div>
 
+<?php if (isset($_SESSION["s_adminId"])) : ?>
+    <nav id="s-admin-navbar" class="text-light text-center">
+        <ul>
+            <li>
+                <a href="/events" class="btn btn-success text-light">Események</a>
+                <a href="/gallery" class="btn btn-success text-light">Galéria</a>
+                <a href="/admins" class="btn btn-success text-light">Adminok</a>
+            </li>
+        </ul>
+    </nav>
+<?php endif ?>
+
 <style>
     @media(min-width: 1024px) {
-        #navigation-panel{
+        #navigation-panel {
             position: fixed;
             right: 100px;
-            top: -10px;
+            top: -5px;
         }
+    }
+
+    #s-admin-navbar {
+        margin-top: 100px;
     }
 </style>

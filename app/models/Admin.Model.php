@@ -14,8 +14,10 @@ class AdminModel
     {
         $userName = $body["userName"];
         $pw = password_hash($body["password"], PASSWORD_DEFAULT);
+        $s_adminId = uniqid();
 
-        $stmt = $this->pdo->prepare("INSERT INTO `super_admin` (`s_adminId`, `userName`, `password`, `createdAt`) VALUES (NULL, :userName, :pw, current_timestamp());");
+        $stmt = $this->pdo->prepare("INSERT INTO `super_admin` (`s_adminId`, `userName`, `password`, `createdAt`) VALUES (:s_adminId, :userName, :pw, current_timestamp());");
+        $stmt->bindParam("s_adminId", $s_adminId);
         $stmt->bindParam("userName", $userName);
         $stmt->bindParam("pw", $pw);
 
@@ -48,6 +50,7 @@ class AdminModel
 
         return true;
     }
+
 
     public function logout()
     {

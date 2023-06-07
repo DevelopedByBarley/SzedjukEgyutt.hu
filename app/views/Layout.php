@@ -13,9 +13,9 @@
 
 <body>
     <?php include 'includes/Header.php' ?>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col d-flex align-items-center justify-content-center flex-column" style="min-height: 79vh">
+            <div class="col" style=" margin-top: 100px">
                 <?= $params["content"] ?? "" ?>
             </div>
         </div>

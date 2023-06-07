@@ -15,7 +15,7 @@ class LoginChecker
     public static function checkUserIsLoggedInOrRedirect($entity,  $location = "/")
     {
         if (self::isLoggedIn($entity)) {
-            return;
+            return true;
         };
         header("Location: $location");
         exit;
