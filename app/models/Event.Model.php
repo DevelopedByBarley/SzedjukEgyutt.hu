@@ -65,11 +65,50 @@ class EventModel
         if ($isSuccess) header("Location: /events");
     }
 
-    public function getLatestEvent() {
-        $stmt = $this->pdo->prepare("SELECT * FROM `events` ORDER BY eventId DESC LIMIT 1");
+    public function getLatestEvent()
+    {
+        $dateTime = new DateTime();
+        $formattedDateTime = $dateTime->format('Y-m-d H:i');
+
+        $stmt = $this->pdo->prepare("SELECT * FROM `events` WHERE `date` > :formattedDateTime ORDER BY `date` ASC LIMIT 1");
+        $stmt->bindValue(':formattedDateTime', $formattedDateTime, PDO::PARAM_STR);
         $stmt->execute();
         $latestEvent = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $latestEvent;
     }
-}
+
+    public function update($body, $id)
+    {
+        $title = isset($body["title"]) ? $body["title"] : '';
+        $location = isset($body["location"]) ? $body["location"] : '';
+        $dateString = isset($body["date"]) ? $body["date"] : '';
+        $content = isset($body["content"]) ? $body["content"] : '';
+
+        $dateTime = new DateTime($dateString);
+        $formattedDateTime = $dateTime->format('Y-m-d H:i');
+
+
+        $stmt = $this->pdo->prepare("UPDATE 
+        `events` 
+        SET 
+        `title` = :title, 
+        `location` = :location, 
+        `content` = :content, 
+        `date` = :date, 
+        `createdAt` = current_timestamp()
+        WHERE 
+        `events`.`eventId` = :id;");
+
+        $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":location", $location);
+        $stmt->bindParam(":date", $formattedDateTime);
+        $stmt->bindParam(":content", $content);
+        $stmt->bindParam(":id", $id);
+
+        $isSuccess = $stmt->execute();
+
+
+        if ($isSuccess) header('Location: /events');
+    }
+};

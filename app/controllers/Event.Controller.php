@@ -47,8 +47,16 @@ class EventController
 
     public function deleteEvent($vars)
     {
+        LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
         $id = $vars["id"];
-
+        
         $this->eventModel->deleteEvent($id);
+    }
+
+    
+    public function updateEvent($vars) {
+        LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
+        $id = $vars["id"];
+        $this->eventModel->update($_POST, $id);
     }
 }

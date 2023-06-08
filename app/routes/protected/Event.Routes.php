@@ -8,3 +8,4 @@ $r->addRoute('GET', '/events/new', [EventController::class, 'eventsForm']);
 $r->addRoute('GET', '/event/delete/{id}', [EventController::class, 'deleteEvent']);
 
 $r->addRoute('POST', '/event/new', [EventController::class, 'newEvent']);
+$r->addRoute('POST', '/event/update/{id}', [EventController::class, 'updateEvent']);

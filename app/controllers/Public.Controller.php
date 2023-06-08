@@ -15,7 +15,7 @@ class PublicController
 
         echo Renderer::render("Layout.php", [
             "content" => Renderer::render("pages/public/Content.php", [
-                "latestEvent" => $this->eventModel->getLatestEvent() ?? null
+                "latestEvent" => $this->eventModel->getLatestEvent()
 
             ])
         ]);
