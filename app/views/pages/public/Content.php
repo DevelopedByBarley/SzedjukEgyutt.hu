@@ -1,5 +1,6 @@
 <?php
-$latestEvent = $params["latestEvent"];
+$latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
+
 ?>
 
 <div class="container">
@@ -40,7 +41,7 @@ $latestEvent = $params["latestEvent"];
             <h1 class="display-4 mt-5 text-center">Következő eseményünk</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             <div class="text-center mt-4">
-                <a href="/event" class="btn btn-outline-light">Részletek</a>
+                <a href="/event/<?= $latestEvent["eventId"] ?>" class="btn btn-outline-light">Részletek</a>
             </div>
         </div>
         <div class="col-xs-12 col-sm-4 mt-2 p-3 rounded d-flex align-items-center justify-content-center flex-column">

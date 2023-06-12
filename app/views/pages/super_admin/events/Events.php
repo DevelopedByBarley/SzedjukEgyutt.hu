@@ -28,7 +28,7 @@
                             <td><?= $event["createdAt"] ?></td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-primary m-1"><i class="bi bi-eye"></i></a>
+                                    <a href="/event/<?= $event["eventId"] ?>" class="btn btn-primary m-1"><i class="bi bi-eye"></i></a>
                                     <a href="/event/update/<?= $event["eventId"] ?>" class="btn btn-warning m-1"><i class="bi bi-arrow-clockwise"></i></a>
                                     <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?= $event["eventId"] ?>">
                                         <i class="bi bi-trash"></i>

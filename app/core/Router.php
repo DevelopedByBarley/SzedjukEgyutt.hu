@@ -6,6 +6,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     require 'app/routes/protected/Admin.Routes.php';
     require 'app/routes/protected/Event.Routes.php';
     require 'app/routes/protected/Gallery.Routes.php';
+    require 'app/routes/public/User.Routes.php';
 });
 
 // Fetch method and URI from somewhere

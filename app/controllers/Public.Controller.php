@@ -21,10 +21,14 @@ class PublicController
         ]);
     }
 
-    public function event()
+    public function event($vars)
     {
+        $id = $vars["id"];
         echo Renderer::render("Layout.php", [
-            "content" => Renderer::render("pages/public/Event.php", [])
+            "content" => Renderer::render("pages/public/Event.php", [
+                "event" => $this->eventModel->getEventById($id),
+                "isRegistered" => $_GET["isRegistered"] ?? null
+            ])
         ]);
     }
 }
