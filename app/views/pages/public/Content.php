@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 $latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
+=======
+$latestEvent = isset($params["latestEvent"]) && $params["latestEvent"] !== false ? $params["latestEvent"] : null;
+>>>>>>> d6ac56037e925899ba1fc1b6c96e6253ff4cb041
 
 ?>
 
@@ -36,29 +40,40 @@ $latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="row mt-5 mb-5 p-1 bg-success text-light" id="event">
         <div class="col-xs-12 col-sm-7 d-flex align-items-center justify-content-center flex-column text-center">
             <h1 class="display-4 mt-5 text-center">Következő eseményünk</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             <div class="text-center mt-4">
                 <a href="/event/<?= $latestEvent["eventId"] ?>" class="btn btn-outline-light">Részletek</a>
+=======
+    <?php if (isset($latestEvent)) : ?>
+        <div class="row mt-5 mb-5 p-1 bg-success text-light" id="event">
+            <div class="col-xs-12 col-sm-7 d-flex align-items-center justify-content-center flex-column text-center">
+                <h1 class="display-4 mt-5 text-center">Következő eseményünk</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <div class="text-center mt-4">
+                    <a href="/event" class="btn btn-outline-light">Részletek</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 mt-2 p-3 rounded d-flex align-items-center justify-content-center flex-column">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    <img src="public/assets/images/heading.jpg" id="event-image" alt="">
+                </div>
+                <div id="event-section">
+                    <h3 id="event-title" class="mt-5">
+                        <?= isset($latestEvent) && count($latestEvent) !== 0 ? $latestEvent["title"] : '' ?>
+                    </h3>
+                    <hr>
+                    <p id="event-content">
+                        <?= isset($latestEvent) && count($latestEvent) !== 0 ? $latestEvent["content"] : '' ?>
+                    </p>
+                </div>
+>>>>>>> d6ac56037e925899ba1fc1b6c96e6253ff4cb041
             </div>
         </div>
-        <div class="col-xs-12 col-sm-4 mt-2 p-3 rounded d-flex align-items-center justify-content-center flex-column">
-            <div class="d-flex align-items-center justify-content-center flex-column">
-                <img src="public/assets/images/heading.jpg" id="event-image" alt="">
-            </div>
-            <div id="event-section">
-                <h3 id="event-title" class="mt-5">
-                    <?= isset($latestEvent) && count($latestEvent) !== 0 ? $latestEvent["title"] : '' ?>
-                </h3>
-                <hr>
-                <p id="event-content">
-                    <?= isset($latestEvent) && count($latestEvent) !== 0 ? $latestEvent["content"] : '' ?>
-                </p>
-            </div>
-        </div>
-    </div>
+    <?php endif ?>
 
 
 </div>

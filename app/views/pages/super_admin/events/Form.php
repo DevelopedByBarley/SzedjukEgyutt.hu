@@ -6,7 +6,11 @@ $eventForUpdate = $params["eventForUpdate"];
 <div class="row  d-flex align-items-center justify-content-center">
     <h1 class="display-4 mb-5 text-center">Új esemény hozzáadása</h1>
     <div class="col-12 col-sm-6">
+<<<<<<< HEAD
         <form method="POST" action="<?= !isset($eventForUpdate) ? '/event/new' : '/event/update/' . $eventForUpdate["eventId"] ?>">
+=======
+        <form method="POST" action='<?= isset($eventForUpdate) ? "/event/update/" . $eventForUpdate["eventId"] : '/event/new'?>'>
+>>>>>>> d6ac56037e925899ba1fc1b6c96e6253ff4cb041
             <!-- Name input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form4Example1">Cím</label>

@@ -1,7 +1,7 @@
 <div class="container-fluid bg-success">
     <nav class="navbar navbar-expand-lg navbar-light bg-success fixed-top p-3" style="min-height: 60px">
         <strong>
-            <a class="navbar-brand text-light" href="/">SzedjükEgyütt <i class="bi bi-balloon-heart"></i> </a>
+            <a class="navbar-brand text-light" href="/">SzedjükEgyütt <img src="public/assets/images/earth.png" style="height: 40px; width: 40px; position: relative; bottom: 5px; left: 2px;"/></a>
         </strong>
         <button class="navbar-toggler" style="background-color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -1,62 +1,73 @@
 <?php
-require 'app/models/Event.Model.php';
+require_once 'app/models/Admin.Model.php';
 
-class EventController
+class AdminController
 {
-    private $eventModel;
+
+    private $adminModel;
 
     public function __construct()
     {
-        $this->eventModel = new EventModel();
+        $this->adminModel = new AdminModel();
     }
 
 
-    public function events()
+    public function index()
     {
-        LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
-        $events = $this->eventModel->getEventsByAdmin();
+        session_start();
+        $isLoggedIn = isset($_SESSION["s_adminId"]) ? true : false;
 
+        if ($isLoggedIn) {
+            header("Location: /admin/dashboard");
+            exit;
+        }
         echo Renderer::render("Layout.php", [
-            "content" => Renderer::render("pages/super_admin/events/Events.php", [
-                "events" => $events
-            ]),
+            "content" => Renderer::render("pages/super_admin/subscription/Form.php")
         ]);
     }
 
-    public function newEvent()
+    public function dashboard()
     {
         LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
-        $this->eventModel->new($_POST);
-    }
-
-
-    public function eventsForm($vars)
-    {
-        LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
-        $eventIdForUpdate = isset($vars["id"]) ? $vars["id"] : null;
-
-
         echo Renderer::render("Layout.php", [
-            "content" => Renderer::render("pages/super_admin/events/Form.php", [
-                "eventForUpdate" => isset($eventIdForUpdate) ? $this->eventModel->getEventById($eventIdForUpdate) : null
-            ])
+            "content" => Renderer::render("pages/super_admin/dashboard/Dashboard.php")
         ]);
     }
 
 
+  
 
-
-    public function deleteEvent($vars)
+    public function gallery()
     {
         LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
-        $id = $vars["id"] ?? null;
-        $this->eventModel->deleteEvent($id);
+        echo Renderer::render("Layout.php", [
+            "content" => Renderer::render("pages/super_admin/gallery/Gallery.php")
+        ]);
     }
 
-    public function updateEvent($vars)
+    public function admins()
     {
         LoginChecker::checkUserIsLoggedInOrRedirect("s_adminId", "/admin");
-        $id = $vars["id"] ?? null;
-        $this->eventModel->update($id, $_POST);
+        echo Renderer::render("Layout.php", [
+            "content" => Renderer::render("pages/super_admin/admins/Admins.php")
+        ]);
+    }
+
+    public function registerAdmin()
+    {
+        $this->adminModel->register($_POST);
+    }
+
+    public function loginAdmin()
+    {
+        $isSuccess = $this->adminModel->login($_POST);
+        if ($isSuccess) {
+            header("Location: /admin/dashboard");
+        }
+    }
+
+    public function logoutAdmin()
+    {
+        $this->adminModel->logout();
     }
 }
