@@ -21,9 +21,9 @@ class UserModel
 
 
         $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
-            (`id`, `name`, `glows`, `bag`, `date`, `email`, `message`, `eventRefId`) 
+            (`id`, `name`, `glows`, `bag`, `email`, `message`, `eventRefId`) 
             VALUES 
-            ('', :name, :glows, :bag, :date, :email, :message, :eventRefId);");
+            ('', :name, :glows, :bag, :email, :message, :eventRefId);");
 
 
         $stmt->bindParam(":name", $name);
