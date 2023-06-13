@@ -24,6 +24,7 @@ class PublicController
     public function event($vars)
     {
         $id = $vars["id"];
+
         echo Renderer::render("Layout.php", [
             "content" => Renderer::render("pages/public/Event.php", [
                 "event" => $this->eventModel->getEventById($id),

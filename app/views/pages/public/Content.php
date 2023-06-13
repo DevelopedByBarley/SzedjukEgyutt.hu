@@ -30,8 +30,12 @@ $latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
             <h1 class="display-5 mt-5">Rólunk</h1>
             <hr>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae voluptatum placeat vero temporibus, unde iure asperiores dolorem harum debitis, nostrum suscipit molestiae, quis cum delectus dolore necessitatibus fuga! Odio, tenetur.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias aperiam error, maxime molestias vero, at repellat dolores, quo voluptas iure placeat reiciendis impedit quaerat quasi cum minus eos architecto repellendus.
+                Sziasztok! Kinga vagyok és a barátommal, Árpival szeretnénk egy zöldebb világban élni! Hogyan? Szemétszedéssel! Budapesten lakom egy park mellett, és gyakran sajnos már az utcára kilépve fogad eldobott hulladék. Így jött az ötlet, hogy (egyelőre) helyi szinten ennek szembe menjünk és cselekedjünk!
+                Ha te is szeretnél tenni valamit és egy tisztább környezetben élni, alább láthatod, mikor tudsz csatlakozni! Gyere és Szedjük Együtt a szemetet!
+
+            <p>
+                <b>"Az intelligens ember tudja, a többieknek pedig szemetelni TILOS!"</b>
+            </p>
             </p>
         </div>
     </div>

@@ -13,23 +13,21 @@ class UserModel
     {
         $name = isset($body["name"]) ? $body["name"] : '';
         $bag = $body["bag"] === 'on' ? 1 : 0;
-        $glows = $body["glows"] === 'on' ? 1 : 0;
-        $email = isset($body["email"]) ? $body["email"] : '';
+        $numOfRegistrations = isset($body["numOfRegistrations"]) ? $body["numOfRegistrations"] : 1;
         $message = isset($body["message"]) ? $body["message"] : '';
 
 
 
 
         $stmt = $this->pdo->prepare("INSERT INTO `registrations` 
-            (`id`, `name`, `glows`, `bag`, `email`, `message`, `eventRefId`) 
+            (`id`, `name`, `bag`, `numOfRegistrations`, `message`, `eventRefId`) 
             VALUES 
-            ('', :name, :glows, :bag, :email, :message, :eventRefId);");
+            ('', :name, :bag, :numOfRegistrations, :message, :eventRefId);");
 
 
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":bag", $bag);
-        $stmt->bindParam(":glows", $glows);
-        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":numOfRegistrations", $numOfRegistrations);
         $stmt->bindParam(":message", $message);
         $stmt->bindParam(":eventRefId", $id);
 

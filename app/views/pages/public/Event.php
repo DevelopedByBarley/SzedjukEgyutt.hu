@@ -27,9 +27,9 @@ $event = $params["event"];
             </div>
             <?php if (isset($_SESSION["s_adminId"])) : ?>
                 <div class="p-2 bg-success text-light w-100">
-                    <span style="font-size: 1.4rem"><strong>Szükséges kesztyűk száma:</strong> <?= $event["tools"]["glows"] ?></span>
+                    <span style="font-size: 1.4rem"><strong>Regisztráltak száma:</strong> <?= $event["registrations"] ?></span>
                     <br>
-                    <span style="font-size: 1.4rem"><strong>Szükséges zsákok száma:</strong> <?= $event["tools"]["bags"] ?></span>
+                    <span style="font-size: 1.4rem"><strong>Szükséges zsákok száma:</strong> <?= $event["bags"] ?></span>
                 </div>
             <?php endif ?>
             <div class="d-flex align-items-center justify-content-center mt-3">
@@ -54,6 +54,16 @@ $event = $params["event"];
     <?php endif ?>
 </div>
 
+
+
+
+
+
+
+
+
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -62,6 +72,9 @@ $event = $params["event"];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-info">
+                    Teljes név megadása nem kötelező!
+                </div>
                 <form action="/register/<?= $event["eventId"] ?>" method="POST">
                     <div class="mb-3">
                         <label for="name" class="col-form-label">Név:</label>
@@ -76,26 +89,19 @@ $event = $params["event"];
                         <input type="radio" class="btn-check" name="bag" id="danger-outlined" autocomplete="off" value="on">
                         <label class="btn btn-outline-primary" for="danger-outlined">Igénylek zsákot</label>
                     </div>
-                    <div class="mb-3">
-                        <input type="radio" class="btn-check" name="glows" id="dont-need-glow" autocomplete="off" checked value="off">
-                        <label class="btn btn-outline-warning" for="dont-need-glow">Hozok kesztyűt</label>
-
-                        <input type="radio" class="btn-check" name="glows" id="need-glow" autocomplete="off" value="on">
-                        <label class="btn btn-outline-warning" for="need-glow">Igénylek kesztyűt</label>
-                    </div>
                     <hr>
                     <div class="mb-3 d-flex align-items-center justify-content-center">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Az eseményről e-mail emlékeztetőt kérek</label>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Többen jövünk!</label>
                         </div>
                     </div>
 
                     <input type="hidden" name="date" value="<?= $event["date"] ?>" />
 
-                    <div class="mb-3" id="email-container" style="display: none">
-                        <label for="name" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email cím">
+                    <div class="mb-3" id="multiplier-container" style="display: none">
+                        <label for="multiplier" class="col-form-label">Hány fő?</label>
+                        <input type="number" class="form-control" id="multiplier" name="numOfRegistrations" min="1" max="4">
                     </div>
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">További üzenet</label>
@@ -119,17 +125,17 @@ $event = $params["event"];
 
 <script>
     const checkbox = document.getElementById('flexSwitchCheckChecked');
-    const emailContainer = document.getElementById('email-container');
-    const emailInput = emailContainer.querySelector('input[type="email"]');
+    const multiplierContainer = document.getElementById('multiplier-container');
+    const multiplierInput = multiplierContainer.querySelector('#multiplier');
 
     checkbox.addEventListener('change', function() {
         if (this.checked) {
-            emailContainer.style.display = 'block';
-            emailInput.setAttribute('required', 'required');
+            multiplierContainer.style.display = 'block';
+            multiplierInput.setAttribute('required', 'required');
 
         } else {
-            emailContainer.style.display = 'none';
-            emailInput.removeAttribute('required');
+            multiplierContainer.style.display = 'none';
+            multiplierInput.removeAttribute('required');
 
         }
     });

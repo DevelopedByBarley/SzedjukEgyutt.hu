@@ -20,14 +20,12 @@ class EventModel
 
         $src = $iframe->getAttribute('src');
 
-        // $src tartalmazza az iframe teljes src attribútumát
         return $src;
     }
 
     public function new($body)
     {
         $bags = 0;
-        $glows = 0;
         $adminId = isset($_SESSION["adminId"]) ? $_SESSION["adminId"] : $_SESSION["s_adminId"];
         $title = isset($body["title"]) ? $body["title"] : '';
         $location = isset($body["location"]) ? $body["location"] : '';
@@ -41,10 +39,9 @@ class EventModel
 
         $mapsUrl = self::getMapsUrlByiFrame($maps);
 
-        $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :title, :location,:glows, :bags, :maps, :content, :date, current_timestamp(), :adminId);");
+        $stmt = $this->pdo->prepare("INSERT INTO `events` VALUES (NULL, :title, :location, :bags, :maps, :content, :date, current_timestamp(), :adminId);");
         $stmt->bindParam(":title", $title);
         $stmt->bindParam(":location", $location);
-        $stmt->bindParam(":glows", $glows);
         $stmt->bindParam(":bags", $bags);
         $stmt->bindParam(":maps", $mapsUrl);
         $stmt->bindParam(":date", $formattedDateTime);
@@ -75,22 +72,20 @@ class EventModel
         $stmt->bindParam(":id", $id);
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $glows = 0;
+        $registrations = 0;
         $bags = 0;
 
         foreach ($users as $user) {
-            if ((int)$user["glows"] !== 0) {
-                $glows += (int)$user["glows"];
-            }
             if ((int)$user["bag"] !== 0) {
                 $bags += (int)$user["bag"];
             }
+
+            $registrations += (int)$user["numOfRegistrations"];
         }
 
         return [
-            "glows" => $glows,
-            "bags" => $bags
+            "bags" => $bags,
+            "registrations" => $registrations
         ];
     }
 
@@ -106,8 +101,13 @@ class EventModel
         $stmt->execute();
         $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if(!$event) {
+            header("Location: /");
+        }
+
         if (isset($adminId)) {
-            $event["tools"] = self::getToolsForEvent($event);
+            $event["bags"] = self::getToolsForEvent($event)["bags"];
+            $event["registrations"] = self::getToolsForEvent($event)["registrations"];
         }
 
         return $event;
@@ -135,7 +135,6 @@ class EventModel
     public function update($id, $body)
     {
         $bags = 0;
-        $glows = 0;
         $adminId = isset($_SESSION["adminId"]) ? $_SESSION["adminId"] : $_SESSION["s_adminId"];
         $title = isset($body["title"]) ? $body["title"] : '';
         $location = isset($body["location"]) ? $body["location"] : '';
@@ -151,7 +150,6 @@ class EventModel
         $stmt = $this->pdo->prepare("UPDATE `events` SET 
         `title` = :title,
         `location` = :location,
-        `glows` = :glows,
         `bags` = :bags,
         `maps` = :maps,
         `content` = :content,
@@ -162,7 +160,6 @@ class EventModel
 
         $stmt->bindParam(":title", $title);
         $stmt->bindParam(":location", $location);
-        $stmt->bindParam(":glows", $glows);
         $stmt->bindParam(":bags", $bags);
         $stmt->bindParam(":maps", $mapsUrl);
         $stmt->bindParam(":date", $formattedDateTime);
