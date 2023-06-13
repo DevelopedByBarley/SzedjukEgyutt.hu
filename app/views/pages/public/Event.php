@@ -19,8 +19,8 @@ $event = $params["event"];
                 <?= $event["content"] ?>
             </p>
         </div>
-        <div class="col-12 col-lg-6 mt-5 bg-light">
-            <div class="p-2 bg-success text-light w-100">
+        <div class="col-12 col-lg-6 mt-5 bg-light" style="box-shadow: 1px -7px 28px -5px rgba(24,153,60,0.43);">
+            <div class="p-2 bg-success text-light w-100 mt-3">
                 <span style="font-size: 1.4rem"><strong>Helyszín:</strong> <?= $event["location"] ?></span>
                 <br>
                 <span style="font-size: 1.4rem"><strong>Időpont:</strong> <?= $event["date"] ?></span>
@@ -72,13 +72,11 @@ $event = $params["event"];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info">
-                    Teljes név megadása nem kötelező!
-                </div>
+
                 <form action="/register/<?= $event["eventId"] ?>" method="POST">
                     <div class="mb-3">
-                        <label for="name" class="col-form-label">Név:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="name" class="col-form-label">Keresztnév:</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Keresztnév">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="col-form-label">Eszközök igénylése:</label>
@@ -104,8 +102,8 @@ $event = $params["event"];
                         <input type="number" class="form-control" id="multiplier" name="numOfRegistrations" min="1" max="4">
                     </div>
                     <div class="mb-3">
-                        <label for="message-text" class="col-form-label">További üzenet</label>
-                        <textarea class="form-control" id="message-text" name="message"></textarea>
+                        <label for="message-text" class="col-form-label">Megjegyzés</label>
+                        <textarea class="form-control" id="message-text" name="message" placeholder="Megjegyzés írása..."></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégsem</button>

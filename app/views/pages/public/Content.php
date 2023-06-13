@@ -1,6 +1,6 @@
 <?php
 $latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
-
+$moreEvents = empty($params["moreEvents"]) ? null : $params["moreEvents"];
 ?>
 
 <div class="container">
@@ -40,10 +40,19 @@ $latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
         </div>
     </div>
 
+
+
     <div class="row mt-5 mb-5 p-1 bg-success text-light" id="event">
         <div class="col-xs-12 col-sm-7 d-flex align-items-center justify-content-center flex-column text-center">
             <h1 class="display-4 mt-5 text-center">Következő eseményünk</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <div>
+                <img src="/public/assets/images/alert.png" style="height: 40px; width: 40px;" />
+                <span><strong>A szedésekre lehetőség szerint saját felszerelést hozz!</strong></span>
+            </div>
+            <div>
+                <img src="/public/assets/images/alert.png" style="height: 40px; width: 40px;" />
+                <span><strong>Ellenkező esetben regisztrációként legfeljebb 1 db zsákot tudunk biztosítani!</strong></span>
+            </div>
             <div class="text-center mt-4">
                 <a href="/event/<?= $latestEvent["eventId"] ?>" class="btn btn-outline-light">Részletek</a>
             </div>
@@ -65,10 +74,44 @@ $latestEvent = $params["latestEvent"] === false ? null : $params["latestEvent"];
     </div>
 
 
+
+    <?php if ($moreEvents) : ?>
+        <div class="row" id="next-events">
+        <h1 class="display-4 mt-5 mb-5 text-center">További tervezett események</h1>
+            <div class="col-xs-12 col-sm-6 col-lg-4 d-flex align-items-center justify-content-center">
+                <?php foreach ($moreEvents as $event) : ?>
+                    <div class="card more-event-card p-2" style="width: 18rem; box-shadow: 1px -7px 28px -5px rgba(24,153,60,0.43);">
+                        <div class="card-body">
+                            <h3 class="card-title p-1"><?= $event["title"] ?></h3>
+                            <hr>
+                            <p class="card-text"><?= $event["content"] ?></p>
+                            <div>
+                                <i class="bi bi-stopwatch" style="font-size: 1.5rem"></i><span>
+                                   <b> <div><?= $event["date"] ?></b>
+                                </span>
+                            </div>
+                            <a href="/event/<?= $event["eventId"] ?>" class="btn btn-success mt-3">Részletek</a>
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+    <?php endif ?>
+
+
 </div>
 
 
 <style>
+
+    .more-event-card {
+        transition: all .4s ease-in-out;
+    }
+
+    .more-event-card:hover {
+        transform: scale(1.02);
+    }
+
     #event-image,
     #event-section {
         width: 100%;

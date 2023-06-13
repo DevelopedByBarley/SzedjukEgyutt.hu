@@ -101,7 +101,7 @@ class EventModel
         $stmt->execute();
         $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if(!$event) {
+        if (!$event) {
             header("Location: /");
         }
 
@@ -122,13 +122,32 @@ class EventModel
         if ($isSuccess) header("Location: /events");
     }
 
-    public function getLatestEvent()
+    public function getLatestEvents()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM `events` ORDER BY eventId DESC LIMIT 1");
+        $today = date("Y-m-d H:i");
+
+        $stmt = $this->pdo->prepare("SELECT * FROM `events` WHERE `date` > :today ORDER BY `date` ASC LIMIT 1");
+        $stmt->bindParam(':today', $today);
         $stmt->execute();
         $latestEvent = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
+        $latestEvent["registrations"] = self::getToolsForEvent($latestEvent)["registrations"];
+
         return $latestEvent;
+    }
+
+    public function getMoreEvents() {
+        $today = date("Y-m-d H:i");
+
+        $stmt = $this->pdo->prepare("SELECT * FROM `events` WHERE `date` > :today ORDER BY `date` ASC LIMIT 4");
+        $stmt->bindParam(':today', $today);
+        $stmt->execute();
+        $moreEvents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        array_shift($moreEvents);
+
+        return $moreEvents;
     }
 
 

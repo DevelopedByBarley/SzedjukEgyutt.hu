@@ -12,11 +12,10 @@ class PublicController
     public function index()
     {
 
-
         echo Renderer::render("Layout.php", [
             "content" => Renderer::render("pages/public/Content.php", [
-                "latestEvent" => $this->eventModel->getLatestEvent()
-
+                "latestEvent" => $this->eventModel->getLatestEvents(),
+                "moreEvents" => $this->eventModel->getMoreEvents()
             ])
         ]);
     }
